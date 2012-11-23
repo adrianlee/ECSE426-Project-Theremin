@@ -3,7 +3,12 @@
 <pre>
 <h1>µVision Build Log</h1>
 <h2>Project:</h2>
-C:\Users\wliu\Desktop\rtx_project\keil\rtx.uvproj
-Project File Date:  10/31/2012
+C:\Users\wliu\Documents\GitHub\ECSE426-Project-Theremin\rtx_project\keil\rtx.uvproj
+Project File Date:  11/23/2012
 
 <h2>Output:</h2>
+Build target 'Project'
+linking...
+Program Size: Code=14068 RO-data=528 RW-data=144 ZI-data=3432  
+FromELF: creating hex file...
+".\obj\output.axf" - 0 Error(s), 0 Warning(s).

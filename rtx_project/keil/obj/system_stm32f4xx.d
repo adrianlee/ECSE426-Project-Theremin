@@ -1,4 +1,4 @@
-.\obj\system_stm32f4xx.o: ../system_stm32f4xx.c
+.\obj\system_stm32f4xx.o: ..\user\src\system_stm32f4xx.c
 .\obj\system_stm32f4xx.o: ../CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h
 .\obj\system_stm32f4xx.o: ../inc/core_cm4.h
 .\obj\system_stm32f4xx.o: C:\Keil\ARM\RV31\Inc\stdint.h

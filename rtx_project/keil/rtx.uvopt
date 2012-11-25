@@ -4199,7 +4199,7 @@
       <Focus>0</Focus>
       <ColumnNumber>1</ColumnNumber>
       <tvExpOptDlg>0</tvExpOptDlg>
-      <TopLine>307</TopLine>
+      <TopLine>308</TopLine>
       <CurrentLine>310</CurrentLine>
       <bDave2>0</bDave2>
       <PathWithFileName>..\STM32F4-Discovery\stm32f4_discovery_audio_codec.c</PathWithFileName>

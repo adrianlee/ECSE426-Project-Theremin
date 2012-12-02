@@ -1,4 +1,5 @@
 .\obj\main.o: ..\user\src\main.c
+.\obj\main.o: ..\STM32F4-Discovery\stm32f4_discovery.h
 .\obj\main.o: ../CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h
 .\obj\main.o: ../inc/core_cm4.h
 .\obj\main.o: C:\Keil\ARM\RV31\Inc\stdint.h
@@ -34,5 +35,4 @@
 .\obj\main.o: ../STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_usart.h
 .\obj\main.o: ../STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_wwdg.h
 .\obj\main.o: ../STM32F4xx_StdPeriph_Driver/inc/misc.h
-.\obj\main.o: ..\STM32F4-Discovery\stm32f4_discovery.h
 .\obj\main.o: ..\STM32F4-Discovery\stm32f4_discovery_audio_codec.h

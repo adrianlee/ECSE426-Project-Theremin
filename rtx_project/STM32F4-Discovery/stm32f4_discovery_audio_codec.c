@@ -247,7 +247,6 @@ static void     Delay(__IO uint32_t nCount);
 static void     Audio_MAL_Init(void);
 static void     Audio_MAL_DeInit(void);
 static void     Audio_MAL_PauseResume(uint32_t Cmd, uint32_t Addr);
-static void     Audio_MAL_Stop(void);
 /*----------------------------------------------------------------------------*/
 
  /* DMA Stream definitions */
@@ -303,10 +302,6 @@ void EVAL_AUDIO_SetAudioInterface(uint32_t Interface)
 
 uint16_t EVAL_AUDIO_GetSampleCallBack(void){
     return 0;
-}
-
-void EVAL_AUDIO_TransferComplete_CallBack(uint32_t pBuffer, uint32_t Size){
-    return;
 }
 
 /**
@@ -1591,7 +1586,7 @@ static void Audio_MAL_PauseResume(uint32_t Cmd, uint32_t Addr)
   * @param  None
   * @retval None
   */
-static void Audio_MAL_Stop(void)
+void Audio_MAL_Stop(void)
 {   
   /* Stop the Transfer on the I2S side: Stop and disable the DMA stream */
   DMA_Cmd(AUDIO_MAL_DMA_STREAM, DISABLE);

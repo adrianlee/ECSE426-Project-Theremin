@@ -10,6 +10,10 @@
 #define DEFAULT_VOLUME 75
 #define VOLUME_RANGE 50
 
+// Recorder
+#define BUFFER_SIZE 16
+uint16_t micBuffer[BUFFER_SIZE];
+
 static void on_orientation_changed(const orientation* orient);
 
 static const float PITCHES[NUM_PITCHES] =
@@ -38,6 +42,10 @@ int main(void)
 	
 	generate_sine(PITCHES[pitch]);
 	osDelay(osWaitForever);
+	
+	//sWaveRecorderInit(I2S_AudioFreq_44k, 16, 1);
+	//WaveRecorderStart(micBuffer, BUFFER_SIZE * 2);
+	//Audio_MAL_Play((uint32_t)micBuffer, BUFFER_SIZE );		
 }
 
 /**

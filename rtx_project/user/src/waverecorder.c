@@ -20,6 +20,7 @@
   */ 
 
 /* Includes ------------------------------------------------------------------*/
+//#include "pdm_filter.h"
 #include "waverecorder.h" 
 
 /** @addtogroup STM32F4-Discovery_Audio_Player_Recorder
@@ -43,28 +44,18 @@
 
 #define AUDIO_REC_SPI_IRQHANDLER          SPI2_IRQHandler
 
-/* Audio recording frequency in Hz */
-#define REC_FREQ                          8000  
-
 /* PDM buffer input size */
 #define INTERNAL_BUFF_SIZE      64
 
-/* PCM buffer output size */
-#define PCM_OUT_SIZE            16
-
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
-uint16_t *writebuffer;
-uint16_t counter = 0;
-uint8_t WaveRecStatus = 0;
+
 /* Current state of the audio recorder interface intialization */
 static uint32_t AudioRecInited = 0;
 PDMFilter_InitStruct Filter;
 /* Audio recording Samples format (from 8 to 16 bits) */
-uint32_t AudioRecBitRes = 16; 
-uint16_t RecBuf[PCM_OUT_SIZE], RecBuf1[PCM_OUT_SIZE];
-uint8_t RecBufHeader[512], Switch = 0;
-__IO uint32_t Data_Status =0;
+uint32_t AudioRecBitRes;
+__IO uint32_t Data_Status = 0;
 /* Audio recording number of channels (1 for Mono or 2 for Stereo) */
 uint32_t AudioRecChnlNbr = 1;
 /* Main buffer pointer for the recorded data storing */
@@ -104,8 +95,8 @@ uint32_t WaveRecorderInit(uint32_t AudioFreq, uint32_t BitRes, uint32_t ChnlNbr)
     RCC->AHB1ENR |= RCC_AHB1ENR_CRCEN;
     
     /* Filter LP & HP Init */
-    Filter.LP_HZ = 8000;
-    Filter.HP_HZ = 10;
+    Filter.LP_HZ = 1000;
+    Filter.HP_HZ = 16000;
     Filter.Fs = 16000;
     Filter.Out_MicChannels = 1;
     Filter.In_MicChannels = 1;
@@ -210,13 +201,15 @@ void AUDIO_REC_SPI_IRQHANDLER(void)
     {
       InternalBufferSize = 0;
      
-      volume = 50;
+      volume = 80;
       
       PDM_Filter_64_LSB((uint8_t *)InternalBuffer, (uint16_t *)pAudioRecBuf, volume , (PDMFilter_InitStruct *)&Filter);
+			
       Data_Status = 1;       
     }
   }
 }
+
 
 /**
   * @brief  Initialize GPIO for wave recorder.
@@ -265,7 +258,7 @@ static void WaveRecorder_SPI_Init(uint32_t Freq)
   
   /* SPI configuration */
   SPI_I2S_DeInit(SPI2);
-  I2S_InitStructure.I2S_AudioFreq = I2S_AudioFreq_44k;
+  I2S_InitStructure.I2S_AudioFreq = 32000;
   I2S_InitStructure.I2S_Standard = I2S_Standard_LSB;
   I2S_InitStructure.I2S_DataFormat = I2S_DataFormat_16b;
   I2S_InitStructure.I2S_CPOL = I2S_CPOL_High;

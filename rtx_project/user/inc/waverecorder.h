@@ -25,10 +25,8 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx.h"
-#include "stm32f4xx.h"
-#include "stm32f4_discovery.h"
-#include "stm32f4_discovery_audio_codec.h"
 #include "pdm_filter.h"
+//#include "main.h"
 
 
 /* Exported types ------------------------------------------------------------*/
@@ -42,7 +40,8 @@ uint8_t WaveRecorderStart(uint16_t* pbuf, uint32_t size);
 uint32_t WaveRecorderStop(void);
 uint32_t WavaRecorderHeaderInit(uint8_t* pHeadBuf);
 void Delay(__IO uint32_t nTime);
-void WaveRecorderUpdate(void);
+// void WaveRecorderUpdate(void);
+// extern uint32_t ReadUnit(uint8_t *buffer, uint8_t idx, uint8_t NbrOfBytes, Endianness BytesFormat);
 
 #endif /* __WAVE_RECORDER_H */
 

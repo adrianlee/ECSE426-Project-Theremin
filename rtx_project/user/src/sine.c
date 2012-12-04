@@ -41,6 +41,12 @@ osThreadDef(swapper_thread, osPriorityNormal, 1, 0);
 static osThreadId generator_id;
 static osThreadId swapper_id;
 
+/**
+  * @brief Initializes the sine generator.
+	* @param freq Sampling frequency
+	* @param vol Initial volume
+  * @retval None
+  */
 void init_sine_generator(uint32_t freq, uint8_t vol)
 {
 	sampling_period = 1.0f / freq;
@@ -55,6 +61,11 @@ void init_sine_generator(uint32_t freq, uint8_t vol)
 	swapper_id = osThreadCreate(osThread(swapper_thread), NULL);
 }
 
+/**
+  * @brief Generates a sine wave with the given frequency.
+	* @param freq Frequency to generate
+  * @retval None
+  */
 void generate_sine(float freq)
 {
 	static bool first = true;
@@ -73,11 +84,22 @@ void generate_sine(float freq)
 	}
 }
 
+/**
+  * @brief Callback invoked when DMA transfer completes.
+	* @param buffer Unused
+	* @param size Unused
+  * @retval None
+  */
 void EVAL_AUDIO_TransferComplete_CallBack(uint32_t buffer, uint32_t size)
 {
 	osSignalSet(swapper_id, SWAP_BUFFERS_SIGNAL);
 }
 
+/**
+  * @brief Computes a sine wave with the given frequency and stores it in the back buffer.
+	* @param freq Frequency of the sine wave
+  * @retval None
+  */
 static void generate_sine_helper(float freq)
 {
 	num_samples = (unsigned int) ((1 / freq) / sampling_period);
@@ -91,6 +113,10 @@ static void generate_sine_helper(float freq)
 	osMutexRelease(buffer_mutex);
 }
 
+/**
+  * @brief Generates sine wave on signal.
+  * @retval None
+  */
 static void generator_thread(const void* arg)
 {
 	while (true)
@@ -101,6 +127,10 @@ static void generator_thread(const void* arg)
 	}
 }
 
+/**
+  * @brief Swaps front and back buffers on signal.
+  * @retval None
+  */
 static void swapper_thread(const void* arg)
 {
 	while (true)
